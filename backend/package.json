@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/src/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node .",
+    "start:dev": "tsc -w & node --watch .",
+    "lint:test": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pre:migrate": "(rm .postgratorrc.json || :) && ts-node postgrator-config.ts",
+    "migrate:up": "npm run pre:migrate && postgrator",
+    "migrate:down": "npm run pre:migrate && postgrator --to=0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/cors": "^8.2.1",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.15.0",
+    "pg": "^8.10.0",
+    "true-di": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/pg": "^8.6.6",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "postgrator-cli": "^6.0.1",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}

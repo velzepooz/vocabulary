@@ -1,0 +1,8 @@
+.tr {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  justify-content: center;
+}
