@@ -1,1 +1,0 @@
-{"version":3,"file":"init-http-controllers.js","sourceRoot":"","sources":["../../src/init-http-controllers.ts"],"names":[],"mappings":";;;AACA,4DAA6D;AAGtD,MAAM,eAAe,GAAG,CAAC,SAAuB,EAAkB,EAAE;IACzE,MAAM,UAAU,GAAG,IAAA,qCAAmB,EAAC,SAAS,CAAC,CAAC;IAElD,OAAO,CAAC,GAAG,UAAU,CAAC,CAAC;AACzB,CAAC,CAAC;AAJW,QAAA,eAAe,mBAI1B"}
