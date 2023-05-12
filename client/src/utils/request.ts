@@ -8,7 +8,8 @@ export type HttpRequestError = {
 
 type MakeHttpRequestType = {
   url: string;
-  options: Pick<RequestInit, 'method'>;
+  options: Pick<RequestInit, 'method' | 'headers'>;
+  data?: any;
 };
 
 export const isHttpRequestError = <T>(response: T | HttpRequestError): response is HttpRequestError => {
@@ -17,10 +18,18 @@ export const isHttpRequestError = <T>(response: T | HttpRequestError): response 
 
 export const makeHttpRequest = async <T>({
   url,
-  options
+  options,
+  data,
 }: MakeHttpRequestType): Promise<T | HttpRequestError> => {
   try {
-    return await (await fetch(url, {...options})).json();
+    return await (await fetch(
+      url,
+      {
+        ...options,
+        ...data && { body: JSON.stringify(data) }
+      })).json();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
   } catch (e: Error) {
     return {
       error: '',

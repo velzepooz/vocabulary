@@ -9,7 +9,7 @@ import {
   IonList,
   IonRow,
 } from '@ionic/react';
-import { informationCircle, trash } from 'ionicons/icons';
+import { trash } from 'ionicons/icons';
 import React from 'react';
 
 import './Table.css';
@@ -51,9 +51,10 @@ const Table: React.FC<ContainerProps> = ({ words, deleteWord }) => {
             </IonItem>
 
             <IonItemOptions side="end">
-              <IonItemOption>
-                <IonIcon slot="icon-only" icon={informationCircle}></IonIcon>
-              </IonItemOption>
+              {/* TODO: add additional info in future*/}
+              {/*<IonItemOption>*/}
+              {/*  <IonIcon slot="icon-only" icon={informationCircle}></IonIcon>*/}
+              {/*</IonItemOption>*/}
               <IonItemOption color="danger">
                 <IonIcon slot="icon-only" icon={trash} onClick={() => handleWordRemove(id)}></IonIcon>
               </IonItemOption>

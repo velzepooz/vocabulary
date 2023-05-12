@@ -3,7 +3,6 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonInput,
   IonItem,
   IonPage,
   IonTextarea,
@@ -12,18 +11,29 @@ import {
 } from '@ionic/react';
 import { useState } from 'react';
 
-export const CreateWordModal: React.FC = ({ onDismiss }: {
-  onDismiss: (data?: string | null | undefined | number, role?: string) => void;
-}) => {
+import type { createWordDataType } from '../modules/word/word.service';
+
+export enum ModalButtonsRoleEnum {
+  CLOSE = 'CLOSE',
+  CREATE = 'CREATE'
+}
+
+interface CreateWordModalProps {
+  onDismiss: (data: createWordDataType | null, role: ModalButtonsRoleEnum) => void;
+}
+
+export const CreateWordModal: React.FC<CreateWordModalProps> = ({ onDismiss }: CreateWordModalProps) => {
   const [word, setWord] = useState<string>('');
   const [meaning, setMeaning] = useState<string>('');
   const [comment, setComment] = useState<string | null>(null);
 
   const createWord = () => {
-    console.log({word})
-    console.log({meaning})
-    console.log({comment})
-    onDismiss(null, 'confirm');
+    const createdWord = {
+      word,
+      meaning,
+      comment,
+    };
+    onDismiss(createdWord, ModalButtonsRoleEnum.CREATE);
   };
 
   return (
@@ -31,51 +41,55 @@ export const CreateWordModal: React.FC = ({ onDismiss }: {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton color="medium" onClick={() => onDismiss(null, 'cancel')}>
-              Cancel
+            <IonButton color="medium" onClick={() => onDismiss(null, ModalButtonsRoleEnum.CLOSE)}>
+              Close
             </IonButton>
           </IonButtons>
           <IonTitle>Create word</IonTitle>
           <IonButtons slot="end">
             <IonButton strong={true} onClick={createWord}>
-              Confirm
+              Create
             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
         <IonItem>
-          <IonInput
-            type="text"
-            inputmode="text"
-            maxlength={3000}
+          <IonTextarea
             labelPlacement="stacked"
-            label="Enter word"
-            placeholder="cat"
-            onIonInput={(event) => setWord(event.target.value)}
-          />
-        </IonItem>
-        <IonItem>
-          <IonInput
-            type="text"
             inputmode="text"
             maxlength={3000}
             minlength={2}
-            labelPlacement="stacked"
-            label="Enter meaning"
-            placeholder="кіт"
-            onIonInput={(event) => setMeaning(event.target.value)}
+            label="Enter word"
+            placeholder="cat"
+            autoGrow={true}
+            required={true}
+            onIonInput={(event) => setWord(event.target.value as string)}
           />
         </IonItem>
         <IonItem>
           <IonTextarea
             labelPlacement="stacked"
+            inputmode="text"
+            maxlength={3000}
+            minlength={2}
+            label="Enter meaning"
+            placeholder="кіт"
+            autoGrow={true}
+            required={true}
+            onIonInput={(event) => setMeaning(event.target.value as string)}
+          />
+        </IonItem>
+        <IonItem>
+          <IonTextarea
+            labelPlacement="stacked"
+            inputmode="text"
             maxlength={3000}
             minlength={2}
             label="Add comment (optional)"
             placeholder="пухнаста тварина"
             autoGrow={true}
-            onIonInput={(event) => setComment(event.target.value)}
+            onIonInput={(event) => setComment(event.target.value as string)}
           ></IonTextarea>
         </IonItem>
       </IonContent>

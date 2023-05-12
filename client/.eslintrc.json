@@ -2,7 +2,6 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "tsconfig.json",
-    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "plugins": [
@@ -23,6 +22,13 @@
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "react/react-in-jsx-scope": "off",
     "no-console": "warn",
-    "no-debugger": "warn"
+    "no-debugger": "warn",
+    "import/order": 2,
+    "import/no-duplicates": 2,
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}]
   }
 }

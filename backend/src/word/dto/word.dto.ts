@@ -10,7 +10,7 @@ export const WordDto = {
       minLength: 1,
     },
     transcription: {
-      type: 'string',
+      type: ['string', 'null'],
       minLength: 1,
     },
     meaning: {
@@ -18,7 +18,7 @@ export const WordDto = {
       minLength: 1,
     },
     comment: {
-      type: 'string',
+      type: ['string', 'null'],
       minLength: 1,
     },
   },

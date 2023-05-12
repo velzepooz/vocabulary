@@ -9,21 +9,19 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { book, ellipse, square } from 'ionicons/icons';
+import { book } from 'ionicons/icons';
 import { Redirect, Route } from 'react-router-dom';
 
-import Main from './pages/Main';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+import Words from './pages/Words';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
-
 /* Optional CSS utils that can be commented out */
 import '@ionic/react/css/padding.css';
 import '@ionic/react/css/float-elements.css';
@@ -43,7 +41,7 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/words">
-            <Main />
+            <Words />
           </Route>
           <Route exact path="/tab2">
             <Tab2 />
@@ -60,14 +58,14 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={book} />
             <IonLabel>Words</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
+          {/*<IonTabButton tab="tab2" href="/tab2">*/}
+          {/*  <IonIcon aria-hidden="true" icon={ellipse} />*/}
+          {/*  <IonLabel>Tab 2</IonLabel>*/}
+          {/*</IonTabButton>*/}
+          {/*<IonTabButton tab="tab3" href="/tab3">*/}
+          {/*  <IonIcon aria-hidden="true" icon={square} />*/}
+          {/*  <IonLabel>Tab 3</IonLabel>*/}
+          {/*</IonTabButton>*/}
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
