@@ -50,6 +50,7 @@ export const initWordControllers = (
         const { id } = request.params;
 
         await wordService.deleteWord(id);
+
         reply.code(200).send({});
       },
     },
