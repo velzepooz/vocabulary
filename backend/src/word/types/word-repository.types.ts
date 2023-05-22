@@ -17,8 +17,12 @@ export type Deps = {
 export type CreateWordData = Pick<Word, 'word' | 'meaning'> &
   Partial<Pick<Word, 'comment' | 'transcription'>>;
 
+export type FindAllParamsType = {
+  search: string;
+};
+
 export interface IWordRepository {
   create(data: CreateWordData): Promise<Word>;
-  getAll(): Promise<Word[]>;
+  findAll(params: FindAllParamsType): Promise<Word[]>;
   deleteOne(id: number): Promise<void>;
 }

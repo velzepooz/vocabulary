@@ -1,4 +1,8 @@
-import { Deps, IWordService } from './types/word-service.types';
+import {
+  Deps,
+  GetAllParamsType,
+  IWordService,
+} from './types/word-service.types';
 import {
   CreateWordData,
   IWordRepository,
@@ -16,8 +20,8 @@ export class WordService implements IWordService {
     return await this._wordRepository.create(data);
   }
 
-  async getAll(): Promise<Word[]> {
-    return await this._wordRepository.getAll();
+  async getAll(data: GetAllParamsType): Promise<Word[]> {
+    return await this._wordRepository.findAll(data);
   }
 
   async deleteWord(id: number): Promise<void> {
