@@ -33,7 +33,23 @@ const Words: React.FC = () => {
     onDismiss: (data: createWordDataType | null, role: ModalButtonsRoleEnum) => dismiss(data, role),
   });
 
-  function openModal() {
+  const fetchWords = async (search?: string): Promise<void> => {
+    const data = await WordService.getWordsList(search);
+    if (isHttpRequestError(data)) {
+      setAlert(data);
+      return;
+    }
+    setWords(data as Word[]);
+  };
+
+  const handleSearch = async (ev: Event): Promise<void> => {
+    const target = ev.target as HTMLIonSearchbarElement;
+    if (target) {
+      await fetchWords(target.value!.toLowerCase());
+    }
+  };
+
+  const openModal = (): void => {
     present({
       onWillDismiss: async (ev: CustomEvent<OverlayEventDetail>) => {
         if (ev.detail.role === ModalButtonsRoleEnum.CREATE) {
@@ -49,16 +65,6 @@ const Words: React.FC = () => {
   }
 
   useEffect(() => {
-    const fetchWords = async () => {
-      const data = await WordService.getWordsList();
-      if (isHttpRequestError(data)) {
-        setAlert(data);
-        return;
-      }
-
-      setWords(data as Word[]);
-    };
-
     fetchWords();
   }, []);
 
@@ -70,7 +76,12 @@ const Words: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonSearchbar animated={true} placeholder="Search word"></IonSearchbar>
+        <IonSearchbar
+          animated={true}
+          placeholder="Search word"
+          debounce={500}
+          onIonInput={(event) => handleSearch(event)}
+        ></IonSearchbar>
         <Table words={words} deleteWord={deleteWord} />
         <IonFab slot="fixed" vertical="bottom" horizontal="start">
           <IonFabButton>

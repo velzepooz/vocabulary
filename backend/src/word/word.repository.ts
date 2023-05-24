@@ -30,9 +30,8 @@ export class WordRepository implements IWordRepository {
   async findAll({ search }: FindAllParamsType): Promise<Word[]> {
     return (
       await this._db.query(
-        `
-        SELECT * 
-        FROM word LOWER(manufacturer) 
+        `SELECT * 
+        FROM word 
         WHERE LOWER(word) LIKE LOWER(CONCAT('%', $1::text, '%')) OR LOWER(meaning) LIKE LOWER(CONCAT('%', $1::text, '%'))
         ORDER BY "createdDate" DESC;`,
         [search],

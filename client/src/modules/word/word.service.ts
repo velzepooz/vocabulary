@@ -7,9 +7,9 @@ import type { Word } from './types';
 export type createWordDataType = Pick<Word, 'word' | 'meaning' | 'comment'>;
 
 export class WordService {
-  static async getWordsList(): Promise<Word[] | HttpRequestError> {
+  static async getWordsList(search?: string): Promise<Word[] | HttpRequestError> {
     return await makeHttpRequest<Word[]>({
-        url: `${url.mainApiUrl}/${url.word.main}`,
+        url: `${url.mainApiUrl}/${url.word.main}?search=${search || ''}`,
         options: {
           method: 'GET'
         }
