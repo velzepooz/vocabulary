@@ -27,14 +27,19 @@ export class WordRepository implements IWordRepository {
     ).rows[0];
   }
 
-  async findAll({ search }: FindAllParamsType): Promise<Word[]> {
+  async findAll({
+    search,
+    cursor = null,
+    take = 10,
+  }: FindAllParamsType): Promise<Word[]> {
     return (
       await this._db.query(
         `SELECT * 
         FROM word 
-        WHERE LOWER(word) LIKE LOWER(CONCAT('%', $1::text, '%')) OR LOWER(meaning) LIKE LOWER(CONCAT('%', $1::text, '%'))
-        ORDER BY "createdDate" DESC;`,
-        [search],
+        WHERE (LOWER(word) LIKE LOWER(CONCAT('%', $1::text, '%')) OR LOWER(meaning) LIKE LOWER(CONCAT('%', $1::text, '%'))) AND id < $2::integer
+        ORDER BY "createdDate" DESC
+        LIMIT $3;`,
+        [search, cursor, take],
       )
     ).rows;
   }

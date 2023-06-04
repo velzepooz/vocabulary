@@ -36,11 +36,17 @@ export const initWordControllers = (
       },
       url: `${urlPrefix}`,
       handler: async (
-        request: FastifyRequest<{ Querystring: { search: string } }>,
+        request: FastifyRequest<{
+          Querystring: {
+            search: string;
+            take: number;
+            cursor: number | null;
+          };
+        }>,
         reply,
       ) => {
-        const { search } = request.query;
-        const words = await wordService.getAll({ search });
+        const queryParams = request.query;
+        const words = await wordService.getAll(queryParams);
 
         reply.code(200).send(words);
       },

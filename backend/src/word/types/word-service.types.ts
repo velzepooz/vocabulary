@@ -6,6 +6,8 @@ export type Deps = {
 
 export type GetAllParamsType = {
   search: string;
+  take: number;
+  cursor: number | null;
 };
 
 export interface IWordService {
