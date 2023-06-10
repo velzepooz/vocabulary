@@ -1,6 +1,7 @@
 import {
   CreateWordData,
   Deps,
+  FindAllParamsType,
   IWordRepository,
   Word,
 } from './types/word-repository.types';
@@ -26,8 +27,22 @@ export class WordRepository implements IWordRepository {
     ).rows[0];
   }
 
-  async getAll(): Promise<Word[]> {
-    return (await this._db.query('SELECT * FROM word;')).rows;
+  async findAll({
+    search,
+    cursor = null,
+    take = 10,
+  }: FindAllParamsType): Promise<Word[]> {
+    return (
+      await this._db.query(
+        `SELECT * 
+        FROM word 
+        WHERE (LOWER(word) LIKE LOWER(CONCAT('%', $1::text, '%')) OR LOWER(meaning) LIKE LOWER(CONCAT('%', $1::text, '%'))) 
+        AND (id < $2::integer OR $2 IS NULL)
+        ORDER BY "createdDate" DESC
+        LIMIT $3;`,
+        [search, cursor, take],
+      )
+    ).rows;
   }
 
   async deleteOne(id: number): Promise<void> {

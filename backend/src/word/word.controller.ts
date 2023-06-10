@@ -3,6 +3,8 @@ import { IDIContainer } from '../di-container';
 import { CreateWordDto } from './dto/create-word.dto';
 import { CreateWordData } from './types/word-repository.types';
 import { DeleteWordDto } from './dto/delete-word.dto';
+import { GetWordsDto } from './dto/get-words.dto';
+import { GetAllParamsType } from './types/word-service.types';
 
 export const initWordControllers = (
   container: IDIContainer,
@@ -30,9 +32,18 @@ export const initWordControllers = (
     },
     {
       method: 'GET',
+      schema: {
+        querystring: GetWordsDto,
+      },
       url: `${urlPrefix}`,
-      handler: async (request, reply) => {
-        const words = await wordService.getAll();
+      handler: async (
+        request: FastifyRequest<{
+          Querystring: GetAllParamsType;
+        }>,
+        reply,
+      ) => {
+        const queryParams = request.query;
+        const words = await wordService.getAll(queryParams);
 
         reply.code(200).send(words);
       },
