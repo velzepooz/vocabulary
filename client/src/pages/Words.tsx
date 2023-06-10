@@ -105,7 +105,7 @@ const Words: React.FC = () => {
         <IonInfiniteScroll onIonInfinite={handleInfinityScroll}>
           <IonInfiniteScrollContent></IonInfiniteScrollContent>
         </IonInfiniteScroll>
-        <IonFab slot="fixed" vertical="bottom" horizontal="start">
+        <IonFab slot="fixed" vertical="bottom" horizontal="end">
           <IonFabButton>
             <IonIcon icon={add} onClick={openModal}></IonIcon>
           </IonFabButton>
