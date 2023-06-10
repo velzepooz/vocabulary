@@ -7,12 +7,14 @@ export interface Store {
   setWords: (words: Word[]) => void;
   deleteWord: (id: number) => void;
   addWord: (words: Word) => void;
+  clearWords: () => void;
 }
 
 export const useStore = create<Store>()((set) => ({
   words: [],
-  setWords: (words) => set(() => ({ words: [...words] })),
+  clearWords: () => set({ words: [] }),
+  setWords: (words) => set((state) => ({ words: [...state.words, ...words] })),
   deleteWord: (id: number) =>
     set((state) => ({ words: state.words.filter((word) => word.id !== id) })),
-  addWord: (word) => set((state) => ({words: [...state.words, word]}))
+  addWord: (word) => set((state) => ({words: [word, ...state.words]}))
 }));
