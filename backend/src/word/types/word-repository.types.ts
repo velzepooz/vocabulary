@@ -18,9 +18,9 @@ export type CreateWordData = Pick<Word, 'word' | 'meaning'> &
   Partial<Pick<Word, 'comment' | 'transcription'>>;
 
 export type FindAllParamsType = {
-  search: string;
-  cursor: number | null;
-  take: number;
+  search?: string;
+  cursor?: number;
+  take?: number;
 };
 
 export interface IWordRepository {
