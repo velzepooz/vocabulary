@@ -4,6 +4,7 @@ import { CreateWordDto } from './dto/create-word.dto';
 import { CreateWordData } from './types/word-repository.types';
 import { DeleteWordDto } from './dto/delete-word.dto';
 import { GetWordsDto } from './dto/get-words.dto';
+import { GetAllParamsType } from './types/word-service.types';
 
 export const initWordControllers = (
   container: IDIContainer,
@@ -37,11 +38,7 @@ export const initWordControllers = (
       url: `${urlPrefix}`,
       handler: async (
         request: FastifyRequest<{
-          Querystring: {
-            search: string;
-            take: number;
-            cursor: number | null;
-          };
+          Querystring: GetAllParamsType;
         }>,
         reply,
       ) => {
