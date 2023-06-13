@@ -9,10 +9,10 @@ export function useErrorAlert(): {setAlert: any} {
   const setAlert = async (error: HttpRequestError) => {
     await presentAlert({
       header: 'Error',
-      subHeader: [errorStatusCodes.appClientError, errorStatusCodes.internalServerError].includes(error.statusCode)
+      subHeader: [errorStatusCodes.appClientError, errorStatusCodes.internalServerError, errorStatusCodes.appServerError].includes(error.code)
         ? 'Network error'
         : 'Oops. You enter incorrect value. Try again.',
-      message: [errorStatusCodes.appClientError, errorStatusCodes.internalServerError].includes(error.statusCode)
+      message: [errorStatusCodes.appClientError, errorStatusCodes.internalServerError, errorStatusCodes.appServerError].includes(error.code)
         ? 'Please, try later'
         : error.message,
       buttons: ['OK'],

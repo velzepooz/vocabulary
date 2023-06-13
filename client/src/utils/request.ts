@@ -2,8 +2,7 @@ import { errorStatusCodes } from '../constants/errorStatusCodes';
 
 export type HttpRequestError = {
   message: string;
-  error: string;
-  statusCode: number;
+  code: number;
 };
 
 type MakeHttpRequestType = {
@@ -13,7 +12,7 @@ type MakeHttpRequestType = {
 };
 
 export const isHttpRequestError = <T>(response: T | HttpRequestError): response is HttpRequestError => {
-  return (response as HttpRequestError).error !== undefined;
+  return (response as HttpRequestError).code !== undefined;
 }
 
 export const makeHttpRequest = async <T>({
@@ -32,9 +31,8 @@ export const makeHttpRequest = async <T>({
     // @ts-ignore
   } catch (e: Error) {
     return {
-      error: '',
       message: e.message,
-      statusCode: errorStatusCodes.appClientError,
+      code: errorStatusCodes.appClientError,
     }
   }
 };
