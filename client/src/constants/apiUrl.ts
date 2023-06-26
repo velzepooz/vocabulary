@@ -1,5 +1,5 @@
 export const url = {
-  mainApiUrl: 'http://127.0.0.1:3000',
+  mainApiUrl: import.meta.env.VITE_MAIN_API_URL as string,
   word: {
     main: 'word',
     create: 'create',
