@@ -9,6 +9,6 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 
-EXPOSE 80
+EXPOSE 8500
 
 CMD ["npm", "run", "start:prod"]
