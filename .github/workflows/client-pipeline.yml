@@ -39,4 +39,4 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           source: "client/dist/*"
           target: "../../var/www/html/slovnyk/"
-          strip_components: 1
+          strip_components: 2
