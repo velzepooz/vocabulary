@@ -22,6 +22,7 @@ jobs:
           cd client && \
           VITE_MAIN_API_URL=${{vars.MAIN_API_URL}} \
           npm run build
+
       - name: Remove to old static files from dev server
         uses: appleboy/ssh-action@master
         with:
@@ -36,6 +37,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_KEY }}
-          source: "dist/*"
+          source: "client/dist/*"
           target: "../../var/www/html/slovnyk/"
           strip_components: 1
