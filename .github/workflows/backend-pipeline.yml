@@ -20,4 +20,5 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           script: |
             cd ./vocabulary/backend || exit 1
+            ls
             bash deploy.sh
