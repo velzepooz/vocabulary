@@ -12,14 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Change folder
-        run: ls -la
-
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd client && \
+          npm ci
 
       - name: Build app
         run: |
+          cd client && \
           VITE_MAIN_API_URL=${{vars.MAIN_API_URL}} \
           npm run build
       - name: Remove to old static files from dev server
