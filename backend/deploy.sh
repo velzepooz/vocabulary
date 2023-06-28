@@ -1,9 +1,7 @@
 #!/bin/bash
 
-REPOSITORY_NAME="vocabulary/backend"
 BRANCH="main"
 
-cd ./$REPOSITORY_NAME || exit 1
 eval "$(ssh-agent)"
 git checkout $BRANCH
 git pull
