@@ -1,4 +1,4 @@
-name: Deploy to server
+name: Deploy client to server
 
 on:
   workflow_dispatch:
